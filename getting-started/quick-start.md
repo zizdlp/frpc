@@ -1,6 +1,4 @@
----
-title: Quick Start
----
+# Quick Start
 
 In this section we'll be going over how you can quickly get started with <Tooltip tip="Frisbee RPC">fRPC</Tooltip>,
 from defining your message types in a <Tooltip tip="Syntax used to describe protocol buffers">proto3</Tooltip> file, to writing your first server and client.
@@ -8,14 +6,14 @@ from defining your message types in a <Tooltip tip="Syntax used to describe prot
 We'll be building a simple echo service that will echo back the message it receives, and later on we'll also show how
 you can use the Frisbee framework itself to build a more complex <Tooltip tip="Publish and Subscribe">PUB\/SUB</Tooltip> service.
 
-# Installation
+## Installation
 
 To get started with <Tooltip tip="Frisbee RPC">fRPC</Tooltip>, you'll need to make sure you have `Go`
 and the `protoc` compiler installed. Then, you'll need to install
 the `protoc-gen-go-frpc` <Tooltip tip="Plugins hook into the protoc compiler and allow for custom code generation">protoc plugin</Tooltip>
 which we will use to generate the server and client code.
 
-## Prerequisites
+### Prerequisites
 
 - [Go](https://golang.org) - fRPC works with `Go` version 1.18 or later. For installation instructions see [Go's Getting Started Guide](https://golang.org/doc/install).
 - [Protocol Buffer Compiler (protoc)](https://developers.google.com/protocol-buffers) - fRPC works with `protoc` version 3. For installation instructions see the [Protoc Getting Started Guide](https://developers.google.com/protoc/docs/getting_started).
@@ -23,7 +21,7 @@ which we will use to generate the server and client code.
 If you're using MacOS and have [Brew](https://brew.sh/) installed, you can use `brew install go`
 to install Golang, and `brew install protoc` to install the protoc compiler.
 
-## Install the fRPC Plugin
+### Install the fRPC Plugin
 
 To install the `protoc-gen-go-frpc` plugin, you'll first need to make sure that your `$GOBIN` environment variable is set and available in
 your system path. See the [Go Environment Variables](https://golang.org/doc/code.html#GOPATH) page
@@ -38,7 +36,7 @@ export PATH=$PATH:$GOBIN
 To install the `protoc-gen-go-frpc` plugin itself, you'll need to run the following command:
 
 ```bash
-$ go install github.com/loopholelabs/frpc-go/protoc-gen-go-frpc@latest
+go install github.com/loopholelabs/frpc-go/protoc-gen-go-frpc@latest
 ```
 
 This will install the `protoc-gen-go-frpc` plugin into your `$GOBIN` directory
@@ -51,14 +49,14 @@ $ which protoc-gen-go-frpc
 /Users/<username>/go/bin/protoc-gen-go-frpc # or $GOPATH/bin/protoc-gen-go-frpc
 ```
 
-# Create a Proto3 File
+## Create a Proto3 File
 
 Now that we have the prerequisites and the `protoc-gen-go-frpc` plugin installed,
 we can start writing our echo service. Let's start by creating a directory to house our project:
 
 ```bash
-$ mkdir -p ~/frpc
-$ cd ~/frpc
+mkdir -p ~/frpc
+cd ~/frpc
 ```
 
 Now we'll create an `echo.proto` file and define our message types:
@@ -98,12 +96,12 @@ message Response{
 And with that you should be ready. Next we'll start the `protoc` compiler to generate
 our fRPC server and client.
 
-# Generate the Server and Client
+## Generate the Server and Client
 
 Let's run the following command to generate the server and client code:
 
 ```bash
-$ protoc --go-frpc_out=. echo.proto
+protoc --go-frpc_out=. echo.proto
 ```
 
 This command tells the `protoc` compiler to generate the server and client code for us and
@@ -112,7 +110,7 @@ by specifying the `--go-frpc_out` flag, we're implicitly specifying that we want
 If we wanted to be more explicit, we could have run the following command:
 
 ```bash
-$ protoc --plugin=protoc-gen-go-frpc=$GOBIN/protoc-gen-go-frpc --go-frpc_out=. echo.proto
+protoc --plugin=protoc-gen-go-frpc=$GOBIN/protoc-gen-go-frpc --go-frpc_out=. echo.proto
 ```
 
 These commands should have generated a new folder at `~/frpc/echo`, which
@@ -123,7 +121,7 @@ that file, you'll find the following interface:
 ...
 
 type EchoService interface {
-	Echo(context.Context, *Request) (*Response, error)
+ Echo(context.Context, *Request) (*Response, error)
 }
 
 ...
@@ -132,7 +130,7 @@ type EchoService interface {
 All we have left to do is implement the `EchoService` interface with our server-side logic,
 and pass that into the server. The generated library will then be able to handle everything else for us.
 
-# Setting up the Server
+## Setting up the Server
 
 To set up our server, we simply need to implement the `EchoService` interface and then start
 the server. We'll start by creating a new `server/main.go` file in our `~/frpc` directory:
@@ -141,16 +139,16 @@ the server. We'll start by creating a new `server/main.go` file in our `~/frpc` 
 package main
 
 import (
-	"context"
+ "context"
     "frpc/echo"
 )
 
 type svc struct{}
 
 func (s *svc) Echo(_ context.Context, req *echo.Request) (*echo.Response, error) {
-	res := new(echo.Response)
-	res.Message = req.Message
-	return res, nil
+ res := new(echo.Response)
+ res.Message = req.Message
+ return res, nil
 }
 ```
 
@@ -165,30 +163,30 @@ Now we can implement the server itself:
 package main
 
 import (
-	"context"
-	"github.com/rs/zerolog"
+ "context"
+ "github.com/rs/zerolog"
     "frpc/echo"
-	"log"
-	"os"
-	"runtime"
-	"time"
+ "log"
+ "os"
+ "runtime"
+ "time"
 )
 
 type svc struct{}
 
 func (s *svc) Echo(_ context.Context, req *echo.Request) (*echo.Response, error) {
-	res := new(echo.Response)
-	res.Message = req.Message
-	return res, nil
+ res := new(echo.Response)
+ res.Message = req.Message
+ return res, nil
 }
 
 func main() {
-	frpcServer, err := echo.NewServer(new(svc), nil, nil)
-	if err != nil {
-		panic(err)
-	}
+ frpcServer, err := echo.NewServer(new(svc), nil, nil)
+ if err != nil {
+  panic(err)
+ }
 
-	err = frpcServer.Start(":8080")
+ err = frpcServer.Start(":8080")
     if err != nil {
         panic(err)
     }
@@ -201,7 +199,7 @@ generated `echo.NewServer()` function. It then binds the server to port `:8080` 
 We're passing in `nil` for both the `*tls.Config` and `logging` parameters in the generated `echo.NewServer()` function because
 we don't want to use TLS or logging in this example.
 
-# Setting up the Client
+## Setting up the Client
 
 To set up our client, we don't need to implement any additional logic, but we do need to create a new `client/main.go` file
 in our `~/frpc` directory:
@@ -210,26 +208,26 @@ in our `~/frpc` directory:
 package main
 
 import (
-	"context"
-	"fmt"
-	"frpc/echo"
-	"log"
-	"os"
-	"os/signal"
-	"syscall"
-	"time"
+ "context"
+ "fmt"
+ "frpc/echo"
+ "log"
+ "os"
+ "os/signal"
+ "syscall"
+ "time"
 )
 
 func main() {
-	c, err := echo.NewClient(nil, nil)
-	if err != nil {
-		panic(err)
-	}
+ c, err := echo.NewClient(nil, nil)
+ if err != nil {
+  panic(err)
+ }
 
-	err = c.Connect("127.0.0.1:8080")
-	if err != nil {
-		panic(err)
-	}
+ err = c.Connect("127.0.0.1:8080")
+ if err != nil {
+  panic(err)
+ }
 }
 ```
 
@@ -243,52 +241,52 @@ To do that, we can write a simple look to send a request to the server every sec
 package main
 
 import (
-	"context"
-	"fmt"
-	"frpc/echo"
-	"log"
-	"os"
-	"os/signal"
-	"syscall"
-	"time"
+ "context"
+ "fmt"
+ "frpc/echo"
+ "log"
+ "os"
+ "os/signal"
+ "syscall"
+ "time"
 )
 
 func main() {
-	c, err := echo.NewClient(nil, nil)
-	if err != nil {
-		panic(err)
-	}
+ c, err := echo.NewClient(nil, nil)
+ if err != nil {
+  panic(err)
+ }
 
-	err = c.Connect("127.0.0.1:8080")
-	if err != nil {
-		panic(err)
-	}
+ err = c.Connect("127.0.0.1:8080")
+ if err != nil {
+  panic(err)
+ }
 
-	stop := make(chan os.Signal, 1)
-	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
+ stop := make(chan os.Signal, 1)
+ signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
 
-	req := echo.NewRequest()
-	i := 0
-	for {
-		select {
-		case <-stop:
-			err = c.Close()
-			if err != nil {
-				panic(err)
-			}
-			return
-		default:
-			req.Message = fmt.Sprintf("#%d", i)
-			log.Printf("Sending Request %s\n", req.Message)
-			res, err := c.EchoService.Echo(context.Background(), req)
-			if err != nil {
-				panic(err)
-			}
-			log.Printf("Received Response %s\n", res.Message)
-			time.Sleep(time.Second)
-			i++
-		}
-	}
+ req := echo.NewRequest()
+ i := 0
+ for {
+  select {
+  case <-stop:
+   err = c.Close()
+   if err != nil {
+    panic(err)
+   }
+   return
+  default:
+   req.Message = fmt.Sprintf("#%d", i)
+   log.Printf("Sending Request %s\n", req.Message)
+   res, err := c.EchoService.Echo(context.Background(), req)
+   if err != nil {
+    panic(err)
+   }
+   log.Printf("Received Response %s\n", res.Message)
+   time.Sleep(time.Second)
+   i++
+  }
+ }
 }
 ```
 
@@ -303,7 +301,7 @@ implement the `EchoService` interface. Everything else was handled for us by **f
 The complete code for this example is available in the [frpc-echo-example](https://github.com/loopholelabs/frpc-echo-example)
 repository on [Github](https://github.com/loopholelabs).
 
-# Next Steps
+## Next Steps
 
 Now that we've seen how easy it is to use **fRPC**, we recommend you check out our [benchmarks](/performance/grpc-benchmarks) pages
 to learn more about how **fRPC** fares against other RPC frameworks.

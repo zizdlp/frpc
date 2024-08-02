@@ -1,8 +1,4 @@
----
-title: "fRPC Documentation"
-sidebarTitle: "Introduction"
-mode: "wide"
----
+# fRPC Documentation
 
 <Tooltip tip="Frisbee RPC">fRPC</Tooltip> is a **proto3-compatible** RPC Framework
 that's designed from the ground up to be **lightweight, extensible, and extremely
@@ -10,7 +6,7 @@ performant**. On average fRPC outperforms other RPC frameworks [by 2-4x in an ap
 comparison](/performance/grpc-benchmarks), and is easily able to handle more than
 2 million RPCs/second on a single server.
 
-<img className="w-full" src="/images/intro.svg" alt="Welcome to fRPC" />
+![intro](./images/intro.svg)
 
 <CardGroup cols={2}>
   <Card

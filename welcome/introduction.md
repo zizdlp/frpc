@@ -6,7 +6,7 @@ performant**. On average fRPC outperforms other RPC frameworks [by 2-4x in an ap
 comparison](/performance/grpc-benchmarks), and is easily able to handle more than
 2 million RPCs/second on a single server.
 
-![intro](./images/intro.svg)
+![intro](../images/intro.svg)
 
 <CardGroup cols={2}>
   <Card

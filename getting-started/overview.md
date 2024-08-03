@@ -1,6 +1,4 @@
----
-title: Overview
----
+# Overview
 
 **fRPC** (or **Frisbee RPC**), is an <Tooltip tip="Remote Procedure Call">RPC</Tooltip> Framework (similar to [gRPC](https://grpc.io) or
 [Apache Thrift](https://thrift.apache.org/)) that's designed from the ground up to be lightweight, extensible, and extremely performant.
@@ -23,7 +21,7 @@ RPC Framework that uses Frisbee under the hood. Our goal is to make fRPC a **dro
 replacement for gRPC** thanks to its generated interfaces matching gRPC's, however we don't support all of the features that
 gRPC does yet, most notable being Streaming and OneOf message types.
 
-# fRPC vs Frisbee
+## fRPC vs Frisbee
 
 It's important to note the distinction between fRPC and Frisbee. fRPC uses proto3 files to generate client and server
 implementations that use the Frisbee framework under the hood. This is why fRPC is so performant compared to other RPC
@@ -33,15 +31,15 @@ At its core, **Frisbee** is best described as a `bring-your-own-protocol` messag
 to make it possible for developers to define their **own** messaging patterns and protocols, and have the actual
 lower-level implementations done for them by the library.
 
-<Note>
-  A simple way to understand this is to think of fRPC as a Request/Reply
-  protocol, and Frisbee as the low-level implementation of that protocol. With
-  Frisbee you can implement any protocol or pattern you'd like, but since
-  Request/Reply is so common fRPC allows you to implement that specific pattern
-  very quickly and easily.
-</Note>
+!!! note 
+    A simple way to understand this is to think of fRPC as a Request/Reply
+    protocol, and Frisbee as the low-level implementation of that protocol. With
+    Frisbee you can implement any protocol or pattern you'd like, but since
+    Request/Reply is so common fRPC allows you to implement that specific pattern
+    very quickly and easily.
 
-# Getting started with fRPC
+
+## Getting started with fRPC
 
 Over the next few pages we'll walk you through the process of getting started with <Tooltip tip="Frisbee RPC">fRPC</Tooltip>,
 from defining your message types in a <Tooltip tip="Syntax used to describe protocol buffers">proto3</Tooltip> file, to writing your first server and client.

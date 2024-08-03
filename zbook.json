@@ -14,12 +14,12 @@
   "layout": [
     {
       "title": "Welcome",
-      "relative_path": "",
+      "relative_path": "welcome",
       "isdir": true,
       "sublayouts": [
         {
           "title": "introduction",
-          "relative_path": "introduction",
+          "relative_path": "welcome/introduction",
           "isdir": false,
           "sublayouts": null
         }

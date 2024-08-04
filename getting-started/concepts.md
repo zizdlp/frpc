@@ -1,6 +1,4 @@
----
-title: Concepts
----
+# Concepts
 
 fRPC is, at its core, a code generator - one which uses the Frisbee messaging framework as its underlying transport mechanism. It hooks into
 the `protoc` compiler and generates an RPC framework that matches the `proto3` spec provided to it.
@@ -18,7 +16,7 @@ There are three main components to fRPC:
 - The Client
 - The Server
 
-# Message Types
+## Message Types
 
 One of the challenges with any messaging system is that the messages must be serialized and deserialized into formats that
 can be transmitted over the wire. With a code generator like fRPC, that means we need to take your `proto3`
@@ -37,7 +35,7 @@ We're also actively working on a [polyglot-rs](https://github.com/loopholelabs/p
 implementation of `Polyglot`, as well as [polyglot-ts](https://github.com/loopholelabs/polyglot-ts) which is a
 TypeScript (and Javascript) implementation of `Polyglot`.
 
-# The Client
+## The Client
 
 The fRPC Client is a simple wrapper around the `frisbee.Client` type, and contains generated helper
 functions for creating and sending requests to an fRPC Server and then returning the accompanying response.
@@ -45,7 +43,7 @@ functions for creating and sending requests to an fRPC Server and then returning
 It's also possible to deviate from those helper functions and access the underlying `frisbee.Client` directly.
 This allows you to do things like turn Frisbee off (and thus retrieve the underlying TCP connection).
 
-# The Server
+## The Server
 
 The fRPC Server is a simple wrapper around the `frisbee.Server` type, and contains generated helper
 functions for handling incoming requests and returning the accompanying response based on the handlers you've passed in
@@ -55,7 +53,7 @@ Similar to the Client, it's also possible to deviate from those helper functions
 `frisbee.Server` directly. This allows you to do things like turn Frisbee off (and thus retrieve the
 underlying TCP connection), or write your own middleware functions for incoming or outgoing packets.
 
-# Accessing Frisbee Directly
+## Accessing Frisbee Directly
 
 As we've mentioned before, it's possible to access the underlying [Frisbee](https://github.com/loopholelabs/frisbee-go) primitives from both the
 client and the server. This is why fRPC is more flexible than other RPC frameworks, and why it's possible to

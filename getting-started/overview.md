@@ -31,13 +31,12 @@ At its core, **Frisbee** is best described as a `bring-your-own-protocol` messag
 to make it possible for developers to define their **own** messaging patterns and protocols, and have the actual
 lower-level implementations done for them by the library.
 
-!!! note 
-    A simple way to understand this is to think of fRPC as a Request/Reply
-    protocol, and Frisbee as the low-level implementation of that protocol. With
-    Frisbee you can implement any protocol or pattern you'd like, but since
-    Request/Reply is so common fRPC allows you to implement that specific pattern
-    very quickly and easily.
-
+!!! note
+A simple way to understand this is to think of fRPC as a Request/Reply
+protocol, and Frisbee as the low-level implementation of that protocol. With
+Frisbee you can implement any protocol or pattern you'd like, but since
+Request/Reply is so common fRPC allows you to implement that specific pattern
+very quickly and easily.
 
 ## Getting started with fRPC
 

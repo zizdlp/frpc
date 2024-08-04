@@ -28,7 +28,7 @@ a number of times before giving up.
 It's currently possible to do this at the application level, but our goal is to have a built-in solution that Developers \
 can use off the shelf, though, and this feature is being actively developed. We're expecting to have it available in the coming months.
 
-# Planned Features
+## Planned Features
 
 These are the features that we've planned to work on in the coming months. If any of these are important to you please
 let us know! We use community feedback to plan our roadmap, and we also encourage contributors to submit their ideas

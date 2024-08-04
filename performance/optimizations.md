@@ -37,7 +37,7 @@ database).
 However, fRPC can also be configured to create a single goroutine to handle all the RPCs from
 each incoming connection. This is a good choice for applications that require very low latency and where the handlers are not blocking operations (such as metrics streaming).
 
-!!! note
+!!! note note
     In our benchmarks we've tested both approaches, though it should be noted that
     the single-goroutine approach is not as efficient as the multi-goroutine
     approach when the blocking time of the RPC handler is high.
@@ -55,9 +55,8 @@ problem.
 For Frisbee, however, we wanted to make use of the existing performance optimizations that networking software and hardware
 have for TCP traffic, and we wanted the strong guarantees around packet delivery that TCP already provides.
 
-!!! note
+!!! note note
     It's important to note that while Frisbee and fRPC were designed to be used
     with TCP connections, there's no reason developers can't use other transports.
     As long as the transport fulfills the 'net.Conn' interface, it will work as
     expected with Frisbee and fRPC.
-

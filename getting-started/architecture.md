@@ -1,6 +1,4 @@
----
-title: Architecture
----
+# Architecture
 
 The architecture of fRPC is based on the standard Server/Client model that a lot of other RPC frameworks are follow.
 The idea is that the `Client` makes a connection with the `Server`, and then sends a structured
@@ -16,7 +14,7 @@ or response. When Frisbee sends a `Packet` of data, it does not wait for a respo
 the protocol suitable for a number of use cases (like real-time streaming), but also means that Request/Reply semantics
 need to be implemented in the application logic - in this case, the code that fRPC generates.
 
-# Server Architecture
+## Server Architecture
 
 The generated fRPC `Server` is based on the RPC `Services` that are defined in the `proto3`
 file that is passed to the `protoc` compiler. Developers are responsible for implementing the generated
@@ -29,7 +27,7 @@ When it receives a request, it looks up the request type in the `handler table` 
 function with the deserialized Request object. The function then returns a Response object that
 is serialized and sent back to the `Client`.
 
-# Client Architecture
+## Client Architecture
 
 The generated fRPC `Client` is also based on the RPC `Services` that are defined in the
 `proto3` file that is passed to the `protoc` compiler. Based on the RPC Calls defined in those services,

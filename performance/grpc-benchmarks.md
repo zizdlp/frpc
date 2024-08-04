@@ -1,6 +1,4 @@
----
-title: gRPC Benchmarks
----
+# gRPC Benchmarks
 
 We can't just claim that fRPC is faster than a battle-tested tool like gRPC without backing it up with an apples-to-apples comparison.
 These benchmarks are publicly available at [https://github.com/loopholelabs/frpc-go-benchmarks](https://github.com/loopholelabs/frpc-go-benchmarks), and we encourage you to run them for yourselves.
@@ -29,7 +27,7 @@ We'll be running a number of different benchmarks with an increasing number of c
 
 The following benchmarks were performed on a bare metal host running Debian 11, 2x AMD EPYC 7643 48-Core CPUs, and 256GB of DDR4 memory. The benchmarks were performed over a local network to avoid inconsistencies due to network latency.
 
-# Client Throughput
+## Client Throughput
 
 For our first set of benchmarks we'll have a number of concurrently connected clients and each client will make RPCs to the fRPC or
 gRPC server using a randomly generated fixed-sized message, and then wait for a response before repeating.
@@ -37,9 +35,9 @@ gRPC server using a randomly generated fixed-sized message, and then wait for a 
 In each of our benchmark runs we're increasing the number of concurrently connected clients and we're measuring the average throughput of each client to see how well fRPC and gRPC scale. We're also
 running a number of separate benchmarks, each with an increasing message size.
 
-## 32-Byte Messages
+### 32-Byte Messages
 
-![32-byte messages](/images/grpc/32byte.png)
+![32-byte messages](../images/grpc/32byte.png)
 
 Starting with **32-byte** messages, it's obvious from the graph above that fRPC consistently outperforms and outscales gRPC -
 often by more than 2x. In the case of 8192 connected clients, fRPC's throughput is still 112 RPCs/second while gRPC drops to only 29.
@@ -49,9 +47,9 @@ That means that clients using fRPC get almost 4x more throughput than gRPC using
 With 32-byte messages and 112 RPCs/second for fRPC that means our total throughput is about 3584B/s per client. With 8192
 clients that means our total throughput is about 28MB/s. for gRPC our total throughput is about 7.25MB/s.
 
-## 512-Byte Messages
+### 512-Byte Messages
 
-![512-byte messages](/images/grpc/512byte.png)
+![512-byte messages](../images/grpc/512byte.png)
 
 Moving to the slightly larger **512-byte** messages, we can see the total throughput seems to drop for each individual client, but
 fRPC is still comfortably 2-3x faster than gRPC is. In the case of 8192 connected clients, fRPC's throughput is still 98 RPCs/second while gRPC drops to only 29.
@@ -59,9 +57,9 @@ fRPC is still comfortably 2-3x faster than gRPC is. In the case of 8192 connecte
 With 512-byte messages and 98 RPCs/second for fRPC that means our total throughput is about 49KB/s per client. With 8192
 clients that means our total throughput is about 392MB/s. for gRPC our total throughput is about 116MB/s.
 
-## 128-KB Messages
+### 128-KB Messages
 
-![128-KB messages](/images/grpc/128kb.png)
+![128-KB messages](../images/grpc/128kb.png)
 
 Now we're moving to the next larger message size, **128-KB**. Total throughput drops as expected for each client, but fRPC is still
 easily 3-4x faster than gRPC. In the case of 100 connected clients, fRPC's throughput is 192 RPCs/second while gRPC drops to only 65.
@@ -69,22 +67,22 @@ easily 3-4x faster than gRPC. In the case of 100 connected clients, fRPC's throu
 With 128KB messages and 192 RPCs/second for fRPC that means our total throughput is about 24MB/s per client.
 With 100 clients that means our total throughput is about 2.34GB/s. For gRPC our total throughput is only about 0.8GB/s.
 
-## 1-MB Messages
+### 1-MB Messages
 
-![1-MB messages](/images/grpc/1mb.png)
+![1-MB messages](../images/grpc/1mb.png)
 
 With the next largest message size, **1MB**, it's clear that we're starting to become bottlenecked by the bare metal host we're using to benchmark.
 
 Still, fRPC keeps its lead with a 3-4x improvement over gRPC, and in the case of 100 connected clients fRPC's throughput
 per client is about 37MB/s. With 100 clients that means our total throughput is about 3.6GB/s. For gRPC our total throughput is only about 1.7GB/s.
 
-# Server Throughput
+## Server Throughput
 
 Now let's look at how fRPC servers scale as we increase the number of connected clients.
 For this benchmark, we're going to make it so that each client repeatedly sends 10 concurrent RPCs in order to
 saturate the underlying TCP connections and the accompanying RPC server.
 
-![server throughput](/images/grpc/throughput.png)
+![server throughput](../images/grpc/throughput.png)
 
 As before, we can see that fRPC consistently outperforms gRPC - but as we increase the number of clients it's also
 clear that fRPC does not get as slowed down as the gRPC server does. It's able to handle **more than
@@ -92,7 +90,7 @@ clear that fRPC does not get as slowed down as the gRPC server does. It's able t
 
 In the case where we have 8192 connected clients, we can see that the gRPC server is able to handle just less than 500,000 RPCs/second - whereas **fRPC can easily handle more than 4x that**.
 
-# Multi-Threaded Performance
+## Multi-Threaded Performance
 
 By default, fRPC creates a new goroutine for each incoming RPC. This is a very similar approach to the one used by gRPC,
 and is a good choice for high-throughput applications where handling the RPC can be a blocking operation (like querying a remote
@@ -111,7 +109,7 @@ to fRPCs default behavior to create a new goroutine to handle each incoming RPC.
 
 Our blocking operation for the following benchmark is a simple `time.Sleep` call that sleeps for exactly 50 Microseconds.
 
-![Multi-threaded Throughput](/images/grpc/multi.png)
+![Multi-threaded Throughput](../images/grpc/multi.png)
 
 The trend above is very similar to the single-threaded benchmarks above - fRPC is still leading gRPC in throughput, but it's also clear that boht gRPC and fRPC have suffered a performance penalty. For gRPC this is likely because the RPCs are now doing "work" and are blocking operations, but
 for fRPC it's a mixture of the added computation as well as the multi-threaded behaviour.

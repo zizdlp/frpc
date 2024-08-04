@@ -32,11 +32,11 @@ to make it possible for developers to define their **own** messaging patterns an
 lower-level implementations done for them by the library.
 
 !!! note
-A simple way to understand this is to think of fRPC as a Request/Reply
-protocol, and Frisbee as the low-level implementation of that protocol. With
-Frisbee you can implement any protocol or pattern you'd like, but since
-Request/Reply is so common fRPC allows you to implement that specific pattern
-very quickly and easily.
+    A simple way to understand this is to think of fRPC as a Request/Reply
+    protocol, and Frisbee as the low-level implementation of that protocol. With
+    Frisbee you can implement any protocol or pattern you'd like, but since
+    Request/Reply is so common fRPC allows you to implement that specific pattern
+    very quickly and easily.
 
 ## Getting started with fRPC
 

@@ -1,14 +1,10 @@
 # Concepts
 
-fRPC is, at its core, a code generator - one which uses the Frisbee messaging framework as its underlying transport mechanism. It hooks into
-the `protoc` compiler and generates an RPC framework that matches the `proto3` spec provided to it.
+fRPC is, at its core, a code generator - one which uses the Frisbee messaging framework as its underlying transport mechanism. It hooks into the `protoc` compiler and generates an RPC framework that matches the `proto3` spec provided to it.
 
-Frisbee was designed to allow developers to define their own messaging protocols, while having a library that would handle
-all the lower level implementation for them.
+Frisbee was designed to allow developers to define their own messaging protocols, while having a library that would handle all the lower level implementation for them.
 
-<Tooltip tip="Request/Reply systems where the request is sent to a remote service which then replies back to the caller">RPC Frameworks</Tooltip>
-are implementations of the Request/Reply pattern, and so fRPC generates the necessary
-Frisbee code to handle that messaging pattern.
+RPC Frameworks[^1] are implementations of the Request/Reply pattern, and so fRPC generates the necessary Frisbee code to handle that messaging pattern.
 
 There are three main components to fRPC:
 
@@ -66,3 +62,5 @@ method (which is exposed in the generated `frpc.Server` type).
 
 To learn more about how [Frisbee](https://github.com/loopholelabs/frisbee-go) works and how you can leverage it from within the generated fRPC
 code, check out the [frisbee-go Github Repository](https://github.com/loopholelabs/frisbee-go).
+
+[^1]: Request/Reply systems where the request is sent to a remote service which then replies back to the caller

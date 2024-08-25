@@ -1,16 +1,16 @@
 # Quick Start
 
-In this section we'll be going over how you can quickly get started with <Tooltip tip="Frisbee RPC">fRPC</Tooltip>,
-from defining your message types in a <Tooltip tip="Syntax used to describe protocol buffers">proto3</Tooltip> file, to writing your first server and client.
+In this section we'll be going over how you can quickly get started with fRPC[^1],
+from defining your message types in a proto3[^2] file, to writing your first server and client.
 
 We'll be building a simple echo service that will echo back the message it receives, and later on we'll also show how
-you can use the Frisbee framework itself to build a more complex <Tooltip tip="Publish and Subscribe">PUB\/SUB</Tooltip> service.
+you can use the Frisbee framework itself to build a more complex PUB\/SUB[^3] service.
 
 ## Installation
 
-To get started with <Tooltip tip="Frisbee RPC">fRPC</Tooltip>, you'll need to make sure you have `Go`
+To get started with fRPC[^1], you'll need to make sure you have `Go`
 and the `protoc` compiler installed. Then, you'll need to install
-the `protoc-gen-go-frpc` <Tooltip tip="Plugins hook into the protoc compiler and allow for custom code generation">protoc plugin</Tooltip>
+the `protoc-gen-go-frpc` protoc plugin[^4]
 which we will use to generate the server and client code.
 
 ### Prerequisites
@@ -313,3 +313,8 @@ to implement your **own messaging protocol** that's fast and performant, you can
 
 If you need any help or have any feedback about Frisbee or fRPC, please to check out our [Discord Community](https://loopholelabs.io/discord)!
 Our team would love to hear your thoughts and understand how you're planning on using fRPC, and we're always happy to help!
+
+[^1]: Frisbee RPC
+[^2]: Syntax used to describe protocol buffers
+[^3]: Publish and Subscribe
+[^4]: Plugins hook into the protoc compiler and allow for custom code generation

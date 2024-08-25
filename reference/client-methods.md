@@ -19,10 +19,9 @@ it will be used to configure TLS for the connection.
 
 An error will be returned if the connection fails.
 
-<Note>
-  The Connect function should only be called once. If FromConn was already
-  called on this client, Connect will return an error.
-</Note>
+!!! note Note
+    The Connect function should only be called once. If FromConn was already
+    called on this client, Connect will return an error.
 
 ## FromConn
 
@@ -31,10 +30,9 @@ if you have a custom transport that you want to use. If a `*tls.Config` was prov
 
 An error will be returned if the connection fails.
 
-<Note>
-  The FromConn function should only be called once. If Connect was already
-  called on this client, FromConn will return an error."
-</Note>
+!!! note Note
+    The FromConn function should only be called once. If Connect was already
+    called on this client, FromConn will return an error."
 
 ## Closed
 
